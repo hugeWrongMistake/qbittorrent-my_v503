@@ -91,4 +91,5 @@ private slots:
     void exportAction();
     void SSLParametersAction();
     void setSSLParametersAction();
+    void setAddedTimeAction();
 };

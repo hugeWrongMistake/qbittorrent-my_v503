@@ -108,6 +108,7 @@ add_library(qbt_base STATIC
     utils/gzip.h
     utils/io.h
     utils/misc.h
+    utils/myutils.h
     utils/net.h
     utils/number.h
     utils/os.h
@@ -204,6 +205,7 @@ add_library(qbt_base STATIC
     utils/gzip.cpp
     utils/io.cpp
     utils/misc.cpp
+    utils/myutils.cpp
     utils/net.cpp
     utils/number.cpp
     utils/os.cpp

@@ -148,6 +148,8 @@ namespace BitTorrent
         qlonglong timeSinceDownload() const override;
         qlonglong timeSinceActivity() const override;
 
+        void setAddedTime(time_t newtime) override;
+
         qreal ratioLimit() const override;
         void setRatioLimit(qreal limit) override;
         int seedingTimeLimit() const override;

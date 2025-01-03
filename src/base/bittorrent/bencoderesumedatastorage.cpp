@@ -50,6 +50,7 @@
 #include "base/utils/io.h"
 #include "base/utils/sslkey.h"
 #include "base/utils/string.h"
+#include "base/version.h"
 #include "infohash.h"
 #include "loadtorrentparams.h"
 
@@ -226,6 +227,16 @@ BitTorrent::LoadResumeDataResult BitTorrent::BencodeResumeDataStorage::loadTorre
     LoadTorrentParams torrentParams;
     torrentParams.category = fromLTString(resumeDataRoot.dict_find_string_value("qBt-category"));
     torrentParams.name = fromLTString(resumeDataRoot.dict_find_string_value("qBt-name"));
+    torrentParams.peer_id = fromLTString(resumeDataRoot.dict_find_string_value("qBt-peer_id"));
+    if (torrentParams.peer_id.length() > 6)
+    {
+        QString& pid = torrentParams.peer_id;
+        // QBT_VERSION_MAJOR, QBT_VERSION_MINOR, QBT_VERSION_BUGFIX, QBT_VERSION_BUILD
+        pid[3] = QChar('0' + QBT_VERSION_MAJOR);
+        pid[4] = QChar('0' + QBT_VERSION_MINOR);
+        pid[5] = QChar('0' + QBT_VERSION_BUGFIX);
+        pid[6] = QChar('0' + QBT_VERSION_BUILD);
+    }
     torrentParams.hasFinishedStatus = resumeDataRoot.dict_find_int_value("qBt-seedStatus");
     torrentParams.firstLastPiecePriority = resumeDataRoot.dict_find_int_value("qBt-firstLastPiecePriority");
     torrentParams.seedingTimeLimit = resumeDataRoot.dict_find_int_value("qBt-seedingTimeLimit", Torrent::USE_GLOBAL_SEEDING_TIME);
@@ -428,6 +439,7 @@ void BitTorrent::BencodeResumeDataStorage::Worker::store(const TorrentID &id, co
     data["qBt-contentLayout"] = Utils::String::fromEnum(resumeData.contentLayout).toStdString();
     data["qBt-firstLastPiecePriority"] = resumeData.firstLastPiecePriority;
     data["qBt-stopCondition"] = Utils::String::fromEnum(resumeData.stopCondition).toStdString();
+    data["qBt-peer_id"] = resumeData.peer_id.toStdString();
 
     if (!resumeData.sslParameters.certificate.isNull())
         data[KEY_SSL_CERTIFICATE] = resumeData.sslParameters.certificate.toPem().toStdString();

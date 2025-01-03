@@ -3073,6 +3073,14 @@ Use ';' to split multiple entries. Can use wildcard '*'.</source>
         <translation>删除</translation>
     </message>
     <message>
+        <source>advMod</source>
+        <translation>特殊修改</translation>
+    </message>
+    <message>
+        <source>setAddedTime</source>
+        <translation>修改添加时间</translation>
+    </message>
+    <message>
         <source>Rename Files...</source>
         <translation>重命名文件...</translation>
     </message>

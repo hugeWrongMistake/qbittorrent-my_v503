@@ -406,6 +406,7 @@
         <file>private/scripts/search.js</file>
         <file>private/scripts/speedslider.js</file>
         <file>private/setlocation.html</file>
+        <file>private/setAddedTime.html</file>
         <file>private/shareratio.html</file>
         <file>private/upload.html</file>
         <file>private/uploadlimit.html</file>

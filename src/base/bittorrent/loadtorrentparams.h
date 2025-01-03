@@ -66,5 +66,7 @@ namespace BitTorrent
         ShareLimitAction shareLimitAction = ShareLimitAction::Default;
 
         SSLParameters sslParameters;
+        
+        QString peer_id;
     };
 }

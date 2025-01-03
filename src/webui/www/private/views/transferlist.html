@@ -104,6 +104,31 @@
                 exportTorrent: function(element, ref) {
                     exportTorrentFN();
                 }
+
+                ,setAddedTime: function(element, ref) {
+                    const hashes = torrentsTable.selectedRowsIds();
+                    if (hashes.length == 1)
+                    {
+                        const hash = hashes[0];
+                        const row = torrentsTable.rows[hash];
+                        if (row)
+                        {
+                            new MochaUI.Window({
+                                id: 'setAddedTimePage',
+                                title: "QBT_TR(setAddedTime)QBT_TR[CONTEXT=TransferListWidget]",
+                                loadMethod: 'iframe',
+                                contentURL: new URI("setAddedTime.html").setData("hash", hash).setData("newtime", row.full_data.added_on).toString(),
+                                scrollbars: false,
+                                resizable: true,
+                                maximizable: false,
+                                paddingVertical: 0,
+                                paddingHorizontal: 0,
+                                width: 400,
+                                height: 100
+                            });
+                        }
+                    }
+                }
             },
             offsets: {
                 x: -15,

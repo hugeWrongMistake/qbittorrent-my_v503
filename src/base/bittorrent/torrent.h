@@ -217,6 +217,7 @@ namespace BitTorrent
         virtual qreal progress() const = 0;
 
         virtual QDateTime addedTime() const = 0;
+        virtual void setAddedTime(time_t) = 0;
         virtual QDateTime completedTime() const = 0;
         virtual QDateTime lastSeenComplete() const = 0;
         virtual qlonglong activeTime() const = 0;

@@ -98,7 +98,7 @@ namespace BitTorrent
         std::shared_ptr<lt::torrent_info> nativeInfo() const;
         QVector<lt::file_index_t> nativeIndexes() const;
 
-    private:
+    public:
         // returns file index or -1 if fileName is not found
         int fileIndex(const Path &filePath) const;
 

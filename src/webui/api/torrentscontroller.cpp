@@ -47,6 +47,7 @@
 #include "base/bittorrent/session.h"
 #include "base/bittorrent/sslparameters.h"
 #include "base/bittorrent/torrent.h"
+#include "base/bittorrent/torrentimpl.h"
 #include "base/bittorrent/torrentdescriptor.h"
 #include "base/bittorrent/trackerentry.h"
 #include "base/bittorrent/trackerentrystatus.h"
@@ -1527,4 +1528,21 @@ void TorrentsController::setSSLParametersAction()
         throw APIError(APIErrorType::BadData);
 
     torrent->setSSLParameters(sslParams);
+}
+
+void TorrentsController::setAddedTimeAction()
+{
+    requireParams({u"hash"_qs, u"newtime"_qs});
+
+    const QString newtimeStr {params()[u"newtime"_qs]};
+    
+    time_t newtime = newtimeStr.toLongLong();
+
+    const auto id = BitTorrent::TorrentID::fromString(params()[u"hash"_qs]);
+
+    BitTorrent::Torrent *const torrent = BitTorrent::Session::instance()->getTorrent(id);
+    if (!torrent)
+        throw APIError(APIErrorType::NotFound);
+
+    torrent->setAddedTime(newtime);
 }
