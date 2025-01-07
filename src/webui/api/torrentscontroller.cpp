@@ -881,7 +881,11 @@ void TorrentsController::removeTrackersAction()
     if (!torrent)
         throw APIError(APIErrorType::NotFound);
 
-    const QStringList urls = params()[u"urls"_s].split(u'|');
+    QStringList urls = params()[u"urls"_s].split(u'|');
+    for(auto &url : urls){
+        url = QUrl::fromPercentEncoding(url.toUtf8());
+        qDebug("removeTracker: %s", qPrintable(url));
+    }
     torrent->removeTrackers(urls);
 
     if (!torrent->isStopped())
